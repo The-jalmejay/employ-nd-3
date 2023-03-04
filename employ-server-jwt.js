@@ -13,7 +13,7 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH,DELETE,HEAD"
   );
-  res.header("Access-Control-Expose-Headers", "X-Auth-Token","cookies");
+  res.header("Access-Control-Expose-Headers", "X-Auth-Token");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept,Authorization"
