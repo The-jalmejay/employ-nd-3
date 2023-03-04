@@ -1,0 +1,16 @@
+{
+  "name": "employ-nd-3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "employ-server-jwt.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "employ-server-jwt.js"
+  },
+  "keywords": ["build","node"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
