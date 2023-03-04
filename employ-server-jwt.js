@@ -66,7 +66,7 @@ app.post("/login", function (req, res) {
     res.cookie("userdata", { user: name, track: [] }, { signed: true });
     // console.log("X-Auth-Token", token);
     res.setHeader("X-Auth-Token", token);
-    res.send(token);
+    res.send(payload);
   }
 });
 app.get("/logout", function (req, res) {
