@@ -13,7 +13,7 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH,DELETE,HEAD"
   );
-  res.header("Access-Control-Expose-Headers", "X-Auth-Token");
+  res.header("Access-Control-Expose-Headers", "X-Auth-Token","cookies");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept,Authorization"
@@ -64,11 +64,9 @@ app.post("/login", function (req, res) {
       expiresIn: jwtExpirySeconds,
     });
     res.cookie("userdata", { user: name, track: [] }, { signed: true });
-    let userdata = req.signedCookies.userdata;
-    console.log("user", userdata);
     // console.log("X-Auth-Token", token);
     res.setHeader("X-Auth-Token", token);
-    res.send(payload);
+    res.send(token);
   }
 });
 app.get("/logout", function (req, res) {
@@ -81,7 +79,7 @@ app.get(
   function (req, res) {
     let userdata = req.signedCookies.userdata;
     console.log("IN GET /myDetails", userdata);
-    // userdata={user:req.user.name,track:[]};
+    userdata={user:req.user.name,track:userdata.track};
     userdata.track.push({ url: "/myDetails", date: Date.now() });
     res.cookie("userdata", userdata, { signed: true });
     res.send(req.user);
@@ -103,7 +101,7 @@ app.get(
     let user = req.user;
     let userdata = req.signedCookies.userdata;
     console.log(userdata);
-    // userdata={user:req.user.name,track:[]};
+    userdata={user:req.user.name,track:userdata.track};
     if (!user) res.status(403).send("forbidden");
     else {
       let log = employees.find((e) => e.empCode === +user.empCode);
